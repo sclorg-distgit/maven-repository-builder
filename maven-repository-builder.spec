@@ -7,7 +7,7 @@
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.0
 # See http://fedoraproject.org/wiki/Packaging:NamingGuidelines#Package_Versioning
-Release:        0.5.alpha2.12%{?dist}
+Release:        0.5.alpha2.13%{?dist}
 # Maven-shared defines maven-repository-builder version as 1.0
 Epoch:          1
 Summary:        Maven repository builder
@@ -25,11 +25,11 @@ BuildArch:      noarch
 BuildRequires:  %{?scl_prefix_java_common}easymock
 BuildRequires:  %{?scl_prefix_java_common}junit
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-maven-surefire-provider-junit
-BuildRequires:  maven30-maven-test-tools
-BuildRequires:  maven30-maven-wagon-file
-BuildRequires:  maven30-maven-wagon-http-lightweight
-BuildRequires:  maven30-maven-shared
+BuildRequires:  %{?scl_prefix}maven-surefire-provider-junit
+BuildRequires:  %{?scl_prefix}maven-test-tools
+BuildRequires:  %{?scl_prefix}maven-wagon-file
+BuildRequires:  %{?scl_prefix}maven-wagon-http-lightweight
+BuildRequires:  %{?scl_prefix}maven-shared
 
 
 %description
@@ -46,7 +46,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{pkg_version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 
 # Replace plexus-maven-plugin with plexus-component-metadata
@@ -62,14 +62,14 @@ cp %{SOURCE1} LICENSE.txt
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # Skipping tests because they don't work without the JARs
 %mvn_build -f
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -84,6 +84,9 @@ set -e -x
 
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1:1.0-0.5.alpha2.13
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1:1.0-0.5.alpha2.12
 - maven33 rebuild
 
