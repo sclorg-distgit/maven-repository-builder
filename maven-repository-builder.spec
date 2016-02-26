@@ -7,7 +7,7 @@
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.0
 # See http://fedoraproject.org/wiki/Packaging:NamingGuidelines#Package_Versioning
-Release:        0.5.alpha2.13%{?dist}
+Release:        0.5.alpha2.14%{?dist}
 # Maven-shared defines maven-repository-builder version as 1.0
 Epoch:          1
 Summary:        Maven repository builder
@@ -24,7 +24,7 @@ BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}easymock
 BuildRequires:  %{?scl_prefix_java_common}junit
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}maven-surefire-provider-junit
 BuildRequires:  %{?scl_prefix}maven-test-tools
 BuildRequires:  %{?scl_prefix}maven-wagon-file
@@ -84,6 +84,9 @@ set -e -x
 
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1:1.0-0.5.alpha2.14
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1:1.0-0.5.alpha2.13
 - maven33 rebuild #2
 
